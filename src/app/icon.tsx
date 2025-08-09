@@ -11,17 +11,19 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 24,
-          background: 'transparent',
           width: '100%',
           height: '100%',
+          borderRadius: '50%',
+          background: 'linear-gradient(45deg, #667eea 0%, #764ba2 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
+          fontSize: 16,
+          fontWeight: 'bold',
         }}
       >
-        🎯
+        T
       </div>
     ),
     {
