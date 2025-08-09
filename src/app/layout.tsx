@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: '/avatar.ico',
+    shortcut: '/avatar.ico',
+    apple: '/avatar.ico',
+  },
 }
 
 export default function RootLayout({
