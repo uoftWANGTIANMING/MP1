@@ -3,25 +3,25 @@ export * from './education'
 export * from './career'
 
 // personal info
-export const name = 'Derek Hu'
-export const headline = 'Teacher at Shanghai Soong Ching Ling School.'
+export const name = 'Wang'
+export const headline = 'Student at the University of Toronto.'
 export const introduction =
-  "Coucou Les Amis! My name is Derek Hu. I'm from Hubei and an alumnus of BUPT, UChicago, and Tsinghua. I’ve been teaching Computer Science at SCLS since 2020."
-export const email = 'tong.hu@scls-sh.org'
-export const githubUsername = 'derekhut'
+  "I'm a Computer Science student deeply engaged in the intersections of Artificial Intelligence and Blockchain technologies.Driven by curiosity and a systems-level mindset, I explore how emerging technologies can reshape digital infrastructure, while constantly challenging assumptions and pursuing rigorous, first-principle thinking."
+export const email = 'tianming.wang@mail.utoronto.ca'
+export const githubUsername = 'uoftWANGTIANMING'
 
 // about page
 export const aboutMeHeadline = 'Who Are You and Why Should I Care?'
 export const aboutParagraphs = [
-  "Coucou Les Amis! My name is Derek Hu. I'm from Hubei and an alumnus of BUPT, UChicago, and Tsinghua. I’ve been teaching Computer Science at SCLS since 2020.",
-  'Currently I am working on a new course called AI Camp, an innovative course where high school students create real-world products and startups while exploring the frontiers of AI.',
-  "I started this blog to share the insights I learn every day. Most blogs focus on education in Artificial Intelligence and general computer science, while others share the life lessons I've learned.",
-]
+  "Hey there! I'm Tianming Wang, a Computer Science student at the University of Toronto with a focus on Artificial Intelligence and Blockchain technologies.",
+  "Currently, I’m exploring how decentralized systems and intelligent algorithms can shape the next generation of digital infrastructure, while building practical skills through real-world projects.",
+  "I created this blog to document my journey, share technical insights, and occasionally reflect on systems thinking, problem-solving, and lessons learned along the way.",
+];
 
 // blog
-export const blogHeadLine = "What I've thinking about."
+export const blogHeadLine = "AI, Code, and Beyond."
 export const blogIntro =
-  "I've written something about AI, programming and life."
+  "Thoughts on AI, algorithms, and building the future.";
 
 // social links
 export type SocialLinkType = {
@@ -33,14 +33,9 @@ export type SocialLinkType = {
 
 export const socialLinks: Array<SocialLinkType> = [
   {
-    name: 'Tiktok',
-    icon: 'tiktok',
-    href: 'https://www.tiktok.com/@harvard?lang=en',
-  },
-  {
     name: 'Bilibili',
     icon: 'bilibili',
-    href: 'https://space.bilibili.com/349721082',
+    href: 'https://space.bilibili.com/3546767679294397',
   },
 ]
 
