@@ -1,0 +1,259 @@
+---
+title: "4-Week AI Sprint Plan: From Machine Learning to LLM Fine-tuning"
+description: "A focused 4-week intensive AI learning plan covering machine learning fundamentals, PyTorch, NLP fine-tuning, and LLM practical applications."
+date: '2025-01-27'
+tags: ["AI", "Machine Learning", "PyTorch", "NLP", "LLM", "LoRA", "Learning Plan"]
+---
+
+## Overview
+I've designed a comprehensive 4-week AI learning sprint plan focused on AI technology stack, independent of blockchain. Each week has clear learning objectives and output requirements, reinforcing theoretical knowledge through practical projects.
+
+---
+
+## Week 1 — Machine Learning Fundamentals & Data Processing
+
+### Deliverables
+- **1 notebook**: Linear/Logistic regression from scratch (NumPy) + scikit-learn implementation on a public dataset
+- **Evaluation criteria**: Regression RMSE ≤ baseline*0.9; Classification F1 ≥ 0.85 (80/20 split)
+
+### Daily Schedule
+- **Day1**: Environment setup + Python/NumPy review
+- **Day2**: pandas data cleaning & visualization
+- **Day3**: Implement Logistic Regression from scratch (GD/regularization)
+- **Day4**: sklearn Pipeline/cross-validation/feature scaling/grid search
+- **Day5**: End-to-end project on a small dataset (UCI/Wine/Titanic)
+
+### Environment & Framework
+```bash
+# Create new environment
+python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -U numpy pandas scikit-learn matplotlib seaborn jupyter
+```
+
+```python
+# sklearn quick binary classification template
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+X, y = ...  # Load your features and labels
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=200))
+clf.fit(X_tr, y_tr)
+print(classification_report(y_te, clf.predict(X_te)))
+```
+
+---
+
+## Week 2 — PyTorch Introduction (CV/NLP)
+
+### Deliverables
+- **1 notebook**: Train a small model with PyTorch (MNIST/CIFAR10)
+- **Evaluation criteria**: MNIST Acc ≥ 98% or CIFAR10 Acc ≥ 80%
+
+### Daily Schedule
+- **Day1**: Tensor/Autograd/optimizers
+- **Day2**: DataLoader/Transforms
+- **Day3**: MLP/CNN training loop
+- **Day4**: Regularization (Dropout, Augmentation)
+- **Day5**: Reproduction & hyperparameter tuning
+
+### Training Loop Framework
+```python
+# PyTorch minimal training loop
+import torch, torch.nn as nn, torch.optim as optim
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+train_ds = datasets.MNIST(root='data', train=True, download=True,
+    transform=transforms.ToTensor())
+test_ds  = datasets.MNIST(root='data', train=False, download=True,
+    transform=transforms.ToTensor())
+train_dl = DataLoader(train_ds, batch_size=128, shuffle=True)
+test_dl  = DataLoader(test_ds, batch_size=256)
+
+class MLP(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(28*28, 256), nn.ReLU(),
+            nn.Linear(256, 128), nn.ReLU(),
+            nn.Linear(128, 10)
+        )
+    def forward(self, x): return self.net(x)
+
+model = MLP().to(device)
+opt = optim.Adam(model.parameters(), lr=1e-3)
+loss_fn = nn.CrossEntropyLoss()
+
+for epoch in range(5):
+    model.train()
+    for xb, yb in train_dl:
+        xb, yb = xb.to(device), yb.to(device)
+        opt.zero_grad(); loss = loss_fn(model(xb), yb)
+        loss.backward(); opt.step()
+    # evaluation
+    model.eval(); correct = total = 0
+    with torch.no_grad():
+        for xb, yb in test_dl:
+            xb, yb = xb.to(device), yb.to(device)
+            pred = model(xb).argmax(1)
+            correct += (pred == yb).sum().item(); total += yb.size(0)
+    print(f"epoch {epoch+1} acc={correct/total:.4f}")
+```
+
+---
+
+## Week 3 — NLP Fine-tuning (Small Models)
+
+### Deliverables
+- **1 notebook**: Fine-tune a small Transformer (e.g., DistilBERT) for sentiment classification/intent recognition
+- **Evaluation criteria**: F1 ≥ 0.90; Export inference.py (command-line prediction)
+
+### Daily Schedule
+- **Day1**: Text cleaning/tokenization
+- **Day2**: datasets & transformers training
+- **Day3**: Early stopping/learning rate/weight decay
+- **Day4**: Error analysis
+- **Day5**: Package inference script
+
+### LoRA Fine-tuning Example (Memory-friendly)
+```bash
+pip install -U torch datasets transformers peft accelerate evaluate
+```
+
+```python
+from datasets import load_dataset
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from peft import LoraConfig, get_peft_model
+import evaluate
+
+ds = load_dataset("sst2")  # or your own dataset
+tok = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+
+def preprocess(ex):
+    out = tok(ex["sentence"], truncation=True, padding="max_length", max_length=128)
+    out["labels"] = ex["label"]; return out
+
+ds = ds.map(preprocess, batched=True)
+ds = ds.remove_columns(["sentence"])
+metric = evaluate.load("glue", "sst2")
+
+model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
+lora_cfg = LoraConfig(r=8, lora_alpha=16, target_modules=["q_lin","v_lin","k_lin"], lora_dropout=0.1, bias="none")
+model = get_peft_model(model, lora_cfg)
+
+args = TrainingArguments(
+    output_dir="out", per_device_train_batch_size=16, per_device_eval_batch_size=32,
+    num_train_epochs=3, learning_rate=3e-4, evaluation_strategy="epoch",
+    logging_steps=50, save_strategy="epoch", fp16=True
+)
+
+def compute_metrics(eval_pred):
+    import numpy as np
+    logits, labels = eval_pred
+    preds = logits.argmax(-1)
+    return metric.compute(predictions=preds, references=labels)
+
+trainer = Trainer(model=model, args=args, train_dataset=ds["train"], eval_dataset=ds["validation"],
+                  tokenizer=tok, compute_metrics=compute_metrics)
+trainer.train()
+trainer.save_model("ckpt")
+```
+
+---
+
+## Week 4 — Mini LLM Practice (Lightweight LoRA + Simple Demo)
+
+### Deliverables
+Fine-tune a small model (e.g., TinyLlama-1.1B or Qwen2.5-0.5B) with LoRA for instruction tuning (small sample, demonstration focused).
+
+- Build a Gradio web interface: input instruction → output response
+- Write 1 English blog post (documenting data construction, training details, performance comparison)
+
+### Daily Schedule
+- **Day1**: Model selection/prepare instruction data (1-5k toy data)
+- **Day2**: LoRA training (PEFT), quantized loading (4bit/8bit)
+- **Day3**: Gradio Demo
+- **Day4**: Comparison & error analysis
+- **Day5**: Blog + README
+
+### Gradio Demo Example
+```bash
+pip install -U gradio
+```
+
+```python
+import gradio as gr
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
+model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"  # or your LoRA merged weights
+tok = AutoTokenizer.from_pretrained(model_id, use_fast=True)
+model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16, device_map="auto")
+
+def chat(prompt):
+    inputs = tok(prompt, return_tensors="pt").to(model.device)
+    out = model.generate(**inputs, max_new_tokens=256, do_sample=True, temperature=0.7, top_p=0.9)
+    return tok.decode(out[0], skip_special_tokens=True)
+
+gr.Interface(fn=chat, inputs="text", outputs="text", title="Mini LLM Demo").launch()
+```
+
+---
+
+## Repository Structure (Unified Management)
+
+```
+ai-sprint/
+├── week1_ml/
+│   ├── 01_numpy_regression.ipynb
+│   ├── 02_sklearn_pipeline.ipynb
+├── week2_pytorch/
+│   ├── mnist_train.ipynb
+│   └── mnist_train.py
+├── week3_nlp/
+│   ├── finetune_distilbert_lora.ipynb
+│   └── inference.py
+├── week4_llm/
+│   ├── finetune_lora.md
+│   └── app_gradio.py
+├── blog/
+│   └── 2025-08-LLM-mini-finetune.md
+└── README.md
+```
+
+---
+
+## Evaluation & Outputs (Weekly Portfolio Items)
+
+- **Week1**: Tabular classification/regression baseline + model selection report
+- **Week2**: CV small model reproduction + hyperparameter tuning records
+- **Week3**: NLP fine-tuning + inference.py (command-line demo)
+- **Week4**: LoRA instruction fine-tuning + Gradio Demo + English blog
+
+---
+
+## Execution Strategy
+
+1. **Daily Check-in**: Complete daily tasks and record learning notes
+2. **Weekly Review**: Check weekly goal completion and adjust next week's plan
+3. **Project Accumulation**: Organize each project into showcaseable works
+4. **Technical Blogging**: Document learning process and problem solutions
+
+---
+
+## Expected Outcomes
+
+- Master complete AI tech stack: from traditional ML to modern deep learning
+- Gain practical project experience: showcaseable results at each stage
+- Build learning system: foundation for future AI development
+- Improve engineering capabilities: complete loop from theory to practice
+
+This plan is both practical and challenging. I believe there will be significant progress after 4 weeks!
