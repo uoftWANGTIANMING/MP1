@@ -9,6 +9,7 @@ export type BlogType = {
   author: string
   date: string
   slug: string
+  draft?: boolean
 }
 
 async function importBlog(
@@ -34,6 +35,9 @@ export async function getAllBlogs() {
   })
 
   let blogs = await Promise.all(blogFileNames.map(importBlog))
+
+  // Filter out draft blogs
+  blogs = blogs.filter(blog => !blog.draft)
 
   return blogs.sort((a, z) => {
     const aDate = a.date ? +new Date(a.date) : 0;
