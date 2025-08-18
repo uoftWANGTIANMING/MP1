@@ -18,5 +18,12 @@ export type EducationItemType = {
       logo: 'college',
       start: '2024',
       end: 'Present'
-    },    
+    },
+    {
+      school: 'University of Michigan',
+      major: 'Blockchain and Cryptocurrency Explained',
+      logo: 'college',
+      start: 'Aug 2025',
+      end: 'Aug 2025'
+    }
   ]
