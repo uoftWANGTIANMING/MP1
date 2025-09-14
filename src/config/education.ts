@@ -20,6 +20,13 @@ export type EducationItemType = {
       end: 'Present'
     },
     {
+      school: 'Columbia+',
+      major: 'Prompt Engineering & Programming with OpenAI',
+      logo: 'college',
+      start: 'Sep 2025',
+      end: 'Sep 2025'
+    },
+    {
       school: 'University of Michigan',
       major: 'Blockchain and Cryptocurrency Explained',
       logo: 'college',
