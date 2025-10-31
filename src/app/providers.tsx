@@ -15,25 +15,12 @@ function usePrevious<T>(value: T) {
 }
 
 function ThemeWatcher() {
-  let { resolvedTheme, setTheme } = useTheme()
+  let { setTheme } = useTheme()
 
   useEffect(() => {
-    let media = window.matchMedia('(prefers-color-scheme: dark)')
-
-    function onMediaChange() {
-      let systemTheme = media.matches ? 'dark' : 'light'
-      if (resolvedTheme === systemTheme) {
-        setTheme('system')
-      }
-    }
-
-    onMediaChange()
-    media.addEventListener('change', onMediaChange)
-
-    return () => {
-      media.removeEventListener('change', onMediaChange)
-    }
-  }, [resolvedTheme, setTheme])
+    // Force dark theme always
+    setTheme('dark')
+  }, [setTheme])
 
   return null
 }
@@ -46,7 +33,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <AppContext.Provider value={{ previousPathname }}>
-      <ThemeProvider attribute="class" disableTransitionOnChange>
+      <ThemeProvider 
+        attribute="class" 
+        defaultTheme="dark"
+        enableSystem={false}
+        disableTransitionOnChange
+      >
         <ThemeWatcher />
         {children}
       </ThemeProvider>

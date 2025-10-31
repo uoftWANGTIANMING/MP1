@@ -4,9 +4,8 @@ export * from './career'
 
 // personal info
 export const name = 'Wang'
-export const headline = 'Student at the University of Toronto.'
-export const introduction =
-  "I'm a Computer Science student deeply engaged in the intersections of Artificial Intelligence and Blockchain technologies.Driven by curiosity and a systems-level mindset, I explore how emerging technologies can reshape digital infrastructure, while constantly challenging assumptions and pursuing rigorous, first-principle thinking."
+export const headline = "CryptoAI Thought."
+export const introduction =''
 export const email = 'tianming.wang@mail.utoronto.ca'
 export const githubUsername = 'uoftWANGTIANMING'
 
@@ -33,9 +32,16 @@ export type SocialLinkType = {
 
 export const socialLinks: Array<SocialLinkType> = [
   {
-    name: 'Bilibili',
-    icon: 'bilibili',
-    href: 'https://space.bilibili.com/3546767679294397',
+    name: 'GitHub',
+    ariaLabel: 'GitHub',
+    icon: 'github',
+    href: `https://github.com/${githubUsername}`,
+  },
+  {
+    name: 'X',
+    ariaLabel: 'X (Twitter)',
+    icon: 'x',
+    href: '', // Add your X/Twitter profile URL here
   },
 ]
 

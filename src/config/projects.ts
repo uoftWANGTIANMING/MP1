@@ -14,31 +14,17 @@ export type ActivityItemType = {
   link?: string
 }
 
-// Awards
-export const awardsHeadLine = "Awards & Honors"
-export const awardsIntro = "Recognition for academic and professional achievements."
-
-export const awards: Array<ActivityItemType> = [
-  {
-    name: 'NOIP Provincial 2nd Prize',
-    description: 'National Olympiad in Informatics in Provinces (C++ Programming)',
-    date: '2018',
-    location: 'China',
-  },
-  {
-    name: 'CSP-J Provincial 2nd Prize',
-    description: 'China Collegiate Computing Contest – Junior Group (C++ Programming)',
-    date: '2019',
-    location: 'China',
-  },  
-]
-
 // Research & Projects
 export const projectHeadLine = "Research & Projects"
 export const projectIntro = "Academic research and technical projects I've worked on."
 
 export const projects: Array<ProjectItemType> = [
-  // Placeholder for future high-impact projects
+  {
+    name: 'AI Companion for Cat',
+    description: 'Why are all AI companions designed for humans? What about cats?',
+    link: { href: '#', label: 'View Project' },
+    tags: ['AI', 'IoT', 'Hardware']
+  },
   {
     name: 'Portfolio Website',
     description: 'Personal website showcasing selected works and achievements.',

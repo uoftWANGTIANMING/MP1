@@ -1,119 +1,104 @@
-import { Container } from '@/components/layout/Container'
-import Newsletter from '@/components/home/Newsletter'
-import Career from '@/components/home/Career'
-import Education from '@/components/home/Education'
-import SocialLinks from '@/components/home/SocialLinks'
-import { headline, introduction } from '@/config/infoConfig'
-import { BlogCard } from '@/components/home/BlogCard'
-import { getAllBlogs, type BlogType } from '@/lib/blogs'
-import { ProjectCard } from '@/components/project/ProjectCard'
-import { ActivityCard } from '@/components/home/ActivityCard'
-import { projectHeadLine, projectIntro, projects, blogHeadLine, blogIntro, techIcons } from '@/config/infoConfig'
-import { awards, awardsHeadLine, awardsIntro, activities, activitiesHeadLine, activitiesIntro } from '@/config/projects'
-import IconCloud from "@/components/ui/icon-cloud"
-import { Award, Briefcase, Heart } from 'lucide-react'
+import Link from 'next/link'
+import { getAllBlogs } from '@/lib/blogs'
+import { projects } from '@/config/projects'
+import { Card } from '@/components/shared/Card'
+import { formatDate } from '@/lib/formatDate'
+import BlockchainNetwork from "@/components/ui/blockchain-network"
 
 export default async function Home() {
-  let blogList = (await getAllBlogs()).slice(0, 4)
+  const blogs = await getAllBlogs()
+  const latestBlog = blogs.length > 0 ? blogs[0] : null
+  const aiCatProject = projects.find(p => p.name === 'AI Companion Cat') || projects[0]
 
   return (
-    <>
-      <Container className="mt-9">
-        {/* personal info */}
-        <div className="mb-10 grid grid-cols-1 md:grid-cols-2">
-          <div className='md:mt-20'>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl opacity-80">
-              {headline}
-            </h2>
-            <p className="mt-6 text-xl text-muted-foreground">
-              {introduction}
-            </p>
-            <SocialLinks className='md:mt-24'/>
-          </div>
-          <div className="relative flex size-full items-center justify-center overflow-hidden w-full px-20 md:px-0 md:w-2/3 ml-auto md:mr-8">
-            <IconCloud iconSlugs={techIcons} />
-          </div>
-        </div>
+    <div className="w-full flex flex-col px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full items-start">
+          {/* Left column - Navigation buttons and Pinned */}
+          <div className="flex flex-col gap-8 pt-28 lg:pt-36">
+            {/* Main navigation buttons */}
+            <div className="flex flex-row items-center gap-4 md:gap-6">
+              <Link
+                href="/projects"
+                className="text-base font-medium text-foreground transition hover:text-primary"
+              >
+                Projects
+              </Link>
+              <span className="text-muted-foreground">·</span>
+              <Link
+                href="/blogs"
+                className="text-base font-medium text-foreground transition hover:text-primary"
+              >
+                Essays
+              </Link>
+            </div>
 
-        {/* Awards */}
-        <div className="mx-auto flex flex-col max-w-xl gap-6 lg:max-w-none my-4 py-8 border-t border-muted">
-          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-4">
-            <Award size={28}/>
-            {awardsHeadLine}
-          </h2>
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3"
-          >
-            {awards.map((award) => (
-              <ActivityCard key={award.name} activity={award} titleAs='h3'/>
-            ))}
-          </ul>
-        </div>
-
-        {/* Research & Projects */}
-        <div className="mx-auto flex flex-col max-w-xl gap-6 lg:max-w-none my-4 py-8 border-t border-muted">
-          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-4">
-            <Briefcase size={28}/>
-            {projectHeadLine}
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-8">
-            {projectIntro}
-          </p>
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3"
-          >
-            {projects.map((project) => (
-              <ProjectCard key={project.name} project={project} titleAs='h3'/>
-            ))}
-          </ul>
-        </div>
-
-        {/* Hobbies & Volunteer */}
-        <div className="mx-auto flex flex-col max-w-xl gap-6 lg:max-w-none my-4 py-8 border-t border-muted">
-          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-4">
-            <Heart size={28}/>
-            {activitiesHeadLine}
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-8">
-            {activitiesIntro}
-          </p>
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3"
-          >
-            {activities.map((activity) => (
-              <ActivityCard key={activity.name} activity={activity} titleAs='h3'/>
-            ))}
-          </ul>
-        </div>
-
-        {/* Blog Section */}
-        <div className="mx-auto flex flex-col max-w-xl gap-6 py-8 my-8 lg:max-w-none border-t border-muted">
-          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-4">
-            {blogHeadLine}
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-8">
-            {blogIntro}
-          </p>
-        </div>
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          {/* left column */}
-          {/* blog */}
-          <div className="flex flex-col gap-16">
-            {blogList.map((blog: BlogType) => (
-              <BlogCard key={blog.slug} blog={blog} titleAs='h3'/>
-            ))}
+            {/* Pinned section */}
+            {(latestBlog || aiCatProject) && (
+              <div className="w-full">
+                <div className="flex flex-col gap-6">
+                  {latestBlog && (
+                    <div className="relative flex flex-col items-start group">
+                      <Card.Eyebrow as="time" dateTime={latestBlog.date} decorate>
+                        Pinned. {formatDate(latestBlog.date)}
+                      </Card.Eyebrow>
+                      <Link href={`/blogs/${latestBlog.slug}`} className="text-base font-semibold tracking-tight">
+                        {latestBlog.title}
+                      </Link>
+                      <p className="relative z-10 mt-2 text-sm text-muted-foreground">
+                        {latestBlog.description}
+                      </p>
+                      <div className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary">
+                        Read essay
+                        <svg className="ml-1 h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  {aiCatProject && (
+                    <div className="flex items-start">
+                      <Link href={aiCatProject.link.href} className="block">
+                        <div className="w-full max-w-[220px] rounded-lg border border-muted-foreground/20 p-5 flex flex-col justify-between bg-card">
+                          <div>
+                            <h3 className="text-sm font-semibold tracking-tight mb-2">
+                              {aiCatProject.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground leading-relaxed">
+                              {aiCatProject.description}
+                            </p>
+                          </div>
+                          {aiCatProject.tags && aiCatProject.tags.length > 0 && (
+                            <div className="mt-3 pt-3 border-t border-muted-foreground/10">
+                              <div className="flex flex-wrap gap-1.5">
+                                {aiCatProject.tags.map((tag, index) => (
+                                  <span
+                                    key={index}
+                                    className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* right column */}
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Career />
-            <Education />
+          {/* Right column - Blockchain network visualization */}
+          <div className="relative flex items-center justify-center w-full min-h-[500px] lg:min-h-[600px] pt-28 lg:pt-36">
+            <div className="w-full h-full">
+              <BlockchainNetwork />
+            </div>
           </div>
         </div>
-      </Container>
-    </>
+      </div>
+    </div>
   )
 }

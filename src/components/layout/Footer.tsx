@@ -1,49 +1,43 @@
 import Link from 'next/link'
 
 import { ContainerInner, ContainerOuter } from '@/components/layout/Container'
-import { footerItems } from '@/config/siteConfig'
-import { ThemeToggle } from '@/components/shared/ThemeToggle'
-import { name } from '@/config/infoConfig'
-import SocialLinks from '@/components/home/SocialLinks'
-
-
-function NavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="transition hover:text-primary"
-    >
-      {children}
-    </Link>
-  )
-}
+import { email, socialLinks } from '@/config/infoConfig'
+import { CustomIcon } from '@/components/shared/CustomIcon'
 
 export function Footer() {
+  const githubLink = socialLinks.find(link => link.name.toLowerCase() === 'github' && link.href)
+  const xLink = socialLinks.find(link => (link.name.toLowerCase() === 'x' || link.name.toLowerCase() === 'twitter') && link.href)
+
+  const links = []
+  if (githubLink) links.push({ ...githubLink, label: 'GitHub' })
+  if (xLink) links.push({ ...xLink, label: 'X' })
+  links.push({ name: 'Email', ariaLabel: 'Email', icon: 'email', href: `mailto:${email}`, label: 'Email' })
+
   return (
-    <footer className="mt-32 flex-none">
+    <footer className="mt-8 flex-none">
       <ContainerOuter>
-        <div className="border-t border-muted pb-16 pt-10">
+        <div className="border-t border-muted pb-12 pt-8">
           <ContainerInner>
-            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-start">
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium">
-                {footerItems.map((item) => (
-                  <NavLink key={item.name} href={item.href}>{item.name}</NavLink>
-                ))}
+            <div className="flex flex-col items-center justify-center gap-3">
+              <div className="text-sm text-muted-foreground">
+                © {new Date().getFullYear()} Tianming Wang
               </div>
-              <div className='flex flex-col justify-center items-start'>
-                <div className='flex flex-row justify-end items-center gap-2'>
-                  <p className="text-sm text-muted-foreground">
-                    &copy; {new Date().getFullYear()} {name}. All rights reserved.
-                  </p>
-                  <ThemeToggle />
-                </div>
-                <SocialLinks className='mt-0'/>
+              <div className="flex items-center justify-center gap-6 text-sm">
+                {links.map((link, index) => (
+                  <span key={link.name} className="flex items-center">
+                    {index > 0 && <span className="text-muted-foreground mr-6">·</span>}
+                    <Link
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={link.ariaLabel || link.label}
+                      className="transition hover:text-primary flex items-center gap-2"
+                    >
+                      <CustomIcon name={link.icon} size={18} />
+                      <span>{link.label}</span>
+                    </Link>
+                  </span>
+                ))}
               </div>
             </div>
           </ContainerInner>

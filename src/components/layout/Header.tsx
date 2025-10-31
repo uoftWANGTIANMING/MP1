@@ -10,12 +10,8 @@ import clsx from 'clsx'
 import { Container } from '@/components/layout/Container'
 import avatarImage from '@/images/avatar.jpg'
 import { navItems } from '@/config/siteConfig'
-import { ThemeToggle } from '@/components/shared/ThemeToggle'
-import { GithubRepo } from '@/components/shared/GithubRepo'
-import { name } from '@/config/infoConfig'
+import { name, headline } from '@/config/infoConfig'
 import { ChevronDownIcon, XIcon } from 'lucide-react'
-
-import TypingAnimation from "@/components/ui/typing-animation";
 
 function MobileNavItem({
   href,
@@ -330,10 +326,10 @@ export function Header() {
           <>
             <div
               ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              className="order-last mt-[calc(theme(spacing.8)-theme(spacing.3))]"
             />
             <Container
-              className="top-0 order-last -mb-3 pt-3"
+              className="top-0 order-last -mb-2 pt-4"
               style={{
                 position:
                   'var(--header-position)' as React.CSSProperties['position'],
@@ -347,33 +343,15 @@ export function Header() {
                 }}
               >
                 <div className="relative">
-                  <AvatarContainer
-                    className="absolute left-0 top-3 origin-left transition-opacity"
-                    style={{
-                      opacity: 'var(--avatar-border-opacity, 0)',
-                      transform: 'var(--avatar-border-transform)',
-                    }}
-                  />
-                  <div className="flex flex-row items-center gap-4">
-                    <Avatar
-                      large
-                      className="block h-16 w-16 origin-left"
-                      style={{ transform: 'var(--avatar-image-transform)' }}
-                    />
+                  <div className="flex flex-row items-center justify-center w-full">
                     <div
-                      className="text-3xl md:text-6xl font-bold tracking-tight flex flex-row"
+                      className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight flex flex-row justify-center py-5"
                       style={{
                         opacity: 'var(--avatar-hi-opacity, 0)',
                         transform: 'var(--avatar-hi-transform)'
                       }}
                     >
-                      Hi,{' '}
-                      <TypingAnimation
-                        className="text-3xl md:text-6xl font-bold tracking-tight"
-                        text={`I'm ${name} `}
-                        duration={150}
-                      />
-                      👋
+                      {headline}
                     </div>
                   </div>
                 </div>
@@ -404,16 +382,12 @@ export function Header() {
                   </AvatarContainer>
                 )}
               </div>
-              <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-              </div>
-              <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto flex flex-row items-center gap-2 md:mr-2">
-                  <ThemeToggle />
-                  <GithubRepo />
+              {!isHomePage && (
+                <div className="flex flex-1 justify-end md:justify-center">
+                  <MobileNavigation className="pointer-events-auto md:hidden" />
+                  <DesktopNavigation className="pointer-events-auto hidden md:block" />
                 </div>
-              </div>
+              )}
             </div>
           </Container>
         </div>
