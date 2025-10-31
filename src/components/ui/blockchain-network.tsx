@@ -63,26 +63,29 @@ export default function BlockchainNetwork() {
       const preferredHeight = width > 500 ? width * 0.8 : width * 0.6
       height = rect.height || preferredHeight || 500
       
-      // Ensure minimum height for proper display
-      height = Math.max(height, 400)
+      // Ensure minimum height for proper display, add extra space for labels at bottom
+      height = Math.max(height, 400) + 40 // Add 40px padding for labels
       
       canvas.width = width
       canvas.height = height
       
       // Recalculate center - slightly below center for better visual balance
       centerX = width / 2
-      // Move center down by a percentage of height, not fixed pixels
-      centerY = height / 2 + height * 0.1 // Move down by 10% of height
+      // Move center down by a percentage of height, but less to prevent bottom clipping
+      centerY = height / 2 + height * 0.05 // Reduced from 0.1 to 0.05 to prevent bottom clipping
       
       // Calculate maximum safe radius to prevent clipping
       // Further increased padding and radius for much larger boundary
-      const padding = 25
+      // Add extra padding at bottom for labels (label offset is 22px, add margin)
+      const paddingTop = 25
+      const paddingBottom = 50 // More padding at bottom for labels
+      const padding = Math.min(paddingTop, paddingBottom)
       // Distance from center to edges
       const distToTop = centerY
-      const distToBottom = height - centerY
+      const distToBottom = height - centerY - 25 // Reserve space for labels at bottom
       const distToLeft = centerX
       const distToRight = width - centerX
-      // Calculate minimum distance to edge
+      // Calculate minimum distance to edge, giving more weight to bottom
       const minDistance = Math.min(distToTop, distToBottom, distToLeft, distToRight)
       // Increase radius multiplier significantly to make boundary much larger
       const safeRadius = minDistance - padding

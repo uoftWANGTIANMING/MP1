@@ -92,7 +92,7 @@ export default async function Home() {
           </div>
 
           {/* Right column - Blockchain network visualization */}
-          <div className="relative flex items-center justify-center w-full min-h-[500px] lg:min-h-[600px] pt-28 lg:pt-36">
+          <div className="relative flex items-center justify-center w-full min-h-[500px] lg:min-h-[600px] pt-20 lg:pt-28">
             <div className="w-full h-full">
               <BlockchainNetwork />
             </div>
