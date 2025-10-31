@@ -126,7 +126,7 @@ export default function BlockchainNetwork() {
     }
 
     function animate() {
-      if (!ctx) return
+      if (!ctx || !canvas) return
 
       // Update radius from current maxRadius (in case of resize)
       radius = maxRadius
