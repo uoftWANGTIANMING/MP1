@@ -10,7 +10,7 @@
       --card-foreground: 240 10% 3.9%;  /* 保持原来的深色文字 */
       --popover: 0 0% 100%;
       --popover-foreground: 240 10% 3.9%;
-      --primary: 171 70% 40%;      /* 替换 --color-primary teal-500 */
+      --primary: 0 0% 10%;      /* 黑白色系 - 深灰色 */
       --primary-foreground: 0 0% 100%;
       --secondary: 240 4.8% 95.9%;
       --secondary-foreground: 240 5.9% 10%;
@@ -38,8 +38,8 @@
       --card-foreground: 0 0% 98%;  /* 保持原来的浅色文字 */
       --popover: 0 0% 0%;          /* 纯黑色背景 */
       --popover-foreground: 0 0% 98%;
-      --primary: 171 70% 50%;      /* 暗色模式的色值 teal-400 */
-      --primary-foreground: 0 0% 100%;
+      --primary: 0 0% 90%;      /* 黑白色系 - 浅灰色 */
+      --primary-foreground: 0 0% 10%;
       --secondary: 0 0% 5%;
       --secondary-foreground: 0 0% 98%;
       --muted: 0 0% 0%;            /* 纯黑色背景 */

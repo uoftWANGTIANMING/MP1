@@ -4,6 +4,7 @@ import { projects } from '@/config/projects'
 import { Card } from '@/components/shared/Card'
 import { formatDate } from '@/lib/formatDate'
 import BlockchainNetwork from "@/components/ui/blockchain-network"
+import { ArrowRight } from 'lucide-react'
 
 export default async function Home() {
   const blogs = await getAllBlogs()
@@ -48,6 +49,13 @@ export default async function Home() {
                       <p className="relative z-10 mt-2 text-sm text-muted-foreground">
                         {latestBlog.description}
                       </p>
+                      <Link 
+                        href={`/blogs/${latestBlog.slug}`}
+                        className="relative z-10 mt-3 inline-flex items-center text-sm font-medium text-foreground hover:text-primary transition-colors group/read"
+                      >
+                        <span>Read article</span>
+                        <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover/read:translate-x-1" />
+                      </Link>
                     </div>
                   )}
                   {aiCatProject && (
