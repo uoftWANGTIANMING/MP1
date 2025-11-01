@@ -48,12 +48,6 @@ export default async function Home() {
                       <p className="relative z-10 mt-2 text-sm text-muted-foreground">
                         {latestBlog.description}
                       </p>
-                      <div className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary">
-                        Read essay
-                        <svg className="ml-1 h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
                     </div>
                   )}
                   {aiCatProject && (

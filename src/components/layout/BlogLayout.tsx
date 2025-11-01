@@ -33,7 +33,7 @@ export function BlogLayout({
   let { previousPathname } = useContext(AppContext)
 
   return (
-    <Container className="mt-16 lg:mt-32">
+    <Container className="mt-8 lg:mt-16">
       <div className="xl:relative">
         <div className="mx-auto max-w-2xl">
           {previousPathname && (
@@ -48,7 +48,7 @@ export function BlogLayout({
           )}
           <article>
             <header className="flex flex-col">
-              <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100 break-words">
+              <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-800 sm:text-4xl dark:text-zinc-100 break-words">
                 {blog.title}
               </h1>
               <time

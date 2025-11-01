@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <Container className="mt-16 sm:mt-32">
+    <Container className="mt-8 lg:mt-16">
       <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
         <div className="lg:pl-20">
           <div className="max-w-xs px-2.5 lg:max-w-none">
@@ -32,7 +32,7 @@ export default function About() {
           <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
             {aboutMeHeadline}
           </h1>
-          <div className="mt-6 space-y-7 text-xl text-zinc-700 dark:text-zinc-300">
+          <div className="mt-4 space-y-7 text-xl text-zinc-700 dark:text-zinc-300">
             {aboutParagraphs.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
