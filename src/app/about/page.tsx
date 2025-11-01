@@ -1,12 +1,9 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
 import { aboutMeHeadline, aboutParagraphs } from '@/config/infoConfig'
 import { Container } from '@/components/layout/Container'
 
 import portraitImage from '@/images/portrait.jpg'
-import SocialLinks from '@/components/about/SocialLinks'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -37,9 +34,6 @@ export default function About() {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
-        </div>
-        <div className="lg:pl-20">
-          <SocialLinks />
         </div>
       </div>
     </Container>
