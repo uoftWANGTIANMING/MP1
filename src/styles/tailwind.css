@@ -67,3 +67,140 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 纸质书风格样式 */
+@layer components {
+  .prose-book {
+    color: rgb(45, 45, 45);
+    line-height: 1.95;
+    font-size: 1.125rem;
+    max-width: 100%;
+  }
+
+  /* 纸质书背景效果 */
+  .paper-background {
+    background-color: #f0ead6;
+    background-image: 
+      linear-gradient(90deg, rgba(0,0,0,.02) 50%, transparent 50%),
+      linear-gradient(rgba(0,0,0,.02) 50%, transparent 50%);
+    background-size: 2px 2px;
+    position: relative;
+  }
+
+  .paper-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0,0,0,.01) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,.01) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .prose-book p {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-indent: 0;
+    text-align: left;
+    line-height: 2;
+  }
+
+  .prose-book p:first-child {
+    margin-top: 0;
+  }
+
+  .prose-book h1,
+  .prose-book h2,
+  .prose-book h3,
+  .prose-book h4 {
+    color: rgb(30, 30, 30);
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    text-indent: 0;
+    line-height: 1.4;
+  }
+
+  .prose-book h1:first-child,
+  .prose-book h2:first-child,
+  .prose-book h3:first-child,
+  .prose-book h4:first-child {
+    margin-top: 0;
+  }
+
+  .prose-book a {
+    color: rgb(45, 45, 45);
+    text-decoration: underline;
+    text-decoration-color: rgba(45, 45, 45, 0.3);
+    text-underline-offset: 2px;
+  }
+
+  .prose-book a:hover {
+    text-decoration-color: rgba(45, 45, 45, 0.6);
+  }
+
+  .prose-book strong {
+    color: rgb(30, 30, 30);
+    font-weight: 600;
+  }
+
+  .prose-book code {
+    color: rgb(30, 30, 30);
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  .prose-book blockquote {
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    color: rgb(60, 60, 60);
+    font-style: italic;
+    padding-left: 1.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-indent: 0;
+  }
+
+  .prose-book ul,
+  .prose-book ol {
+    padding-left: 1.75rem;
+    text-indent: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-book li {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    text-indent: 0;
+    line-height: 1.95;
+  }
+
+  .prose-book li p {
+    text-indent: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-book hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .prose-book img {
+    border-radius: 0.375rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    height: auto;
+  }
+}

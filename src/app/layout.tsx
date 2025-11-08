@@ -1,7 +1,7 @@
 import { type Metadata } from 'next'
 
 import { Providers } from '@/app/providers'
-import { Layout } from '@/components/layout/Layout'
+import { ConditionalLayout } from '@/components/layout/ConditionalLayout'
 import { name, headline, introduction } from '@/config/infoConfig'
 import '@/styles/tailwind.css'
 
@@ -31,10 +31,23 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (window.location.pathname.startsWith('/cn')) {
+                  document.documentElement.style.backgroundColor = '#f0ead6';
+                  document.body.style.backgroundColor = '#f0ead6';
+                  document.body.style.display = 'block';
+                  document.body.className = 'min-h-screen font-serif';
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
         <Providers>
-          <div className="flex w-full min-h-full">
-            <Layout>{children}</Layout>
-          </div>
+          <ConditionalLayout>{children}</ConditionalLayout>
         </Providers>
       </body>
     </html>
