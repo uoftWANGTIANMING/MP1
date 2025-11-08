@@ -14,18 +14,18 @@ export function Footer() {
   links.push({ name: 'Email', ariaLabel: 'Email', icon: 'email', href: `mailto:${email}`, label: 'Email' })
 
   return (
-    <footer className="mt-8 flex-none">
+    <footer className="mt-2 sm:mt-4 lg:mt-8 flex-none">
       <ContainerOuter>
-        <div className="border-t border-muted pb-12 pt-8">
+        <div className="border-t border-muted pb-4 sm:pb-6 lg:pb-12 pt-3 sm:pt-4 lg:pt-8">
           <ContainerInner>
             <div className="flex flex-col items-center justify-center gap-3">
               <div className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} Tianming Wang
               </div>
-              <div className="flex items-center justify-center gap-6 text-sm">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">
                 {links.map((link, index) => (
                   <span key={link.name} className="flex items-center">
-                    {index > 0 && <span className="text-muted-foreground mr-6">·</span>}
+                    {index > 0 && <span className="text-muted-foreground mr-4 sm:mr-6">·</span>}
                     <Link
                       href={link.href}
                       target="_blank"

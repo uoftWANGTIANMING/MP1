@@ -10,12 +10,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className="fixed inset-0 flex justify-center sm:px-8">
+      <div className="fixed inset-0 flex justify-center sm:px-8 z-[-1]">
         <div className="flex w-full lg:px-8">
           <div className="w-full shadow-xl dark:bg-muted" />
         </div>
       </div>
-      <div className={`relative flex w-full flex-col min-h-screen px-4 sm:px-0`}>
+      <div className={`relative flex w-full flex-col min-h-screen px-2 sm:px-4 lg:px-0`}>
         <Header />
         <main className="flex-auto">{children}</main>
         <Footer />

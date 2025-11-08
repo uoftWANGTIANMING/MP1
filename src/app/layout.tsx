@@ -36,6 +36,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // 设置 viewport meta 标签
+                let viewport = document.querySelector('meta[name="viewport"]');
+                if (!viewport) {
+                  viewport = document.createElement('meta');
+                  viewport.setAttribute('name', 'viewport');
+                  document.head.appendChild(viewport);
+                }
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=5');
+                
                 if (window.location.pathname.startsWith('/cn')) {
                   document.documentElement.style.backgroundColor = '#f0ead6';
                   document.body.style.backgroundColor = '#f0ead6';

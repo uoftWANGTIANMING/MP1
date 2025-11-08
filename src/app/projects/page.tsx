@@ -19,14 +19,14 @@ export default function Projects() {
     >
       <ul
         role="list"
-        className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 pb-5"
+        className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 pb-2 sm:pb-5"
       >
         {projects.map((project) => (
           <ProjectCard key={project.name} project={project} />
         ))}
       </ul>
-      <div className="mx-auto flex flex-col max-w-xl gap-6 lg:max-w-none my-2 py-4 border-t border-muted">
-          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-4">
+      <div className="mx-auto flex flex-col max-w-xl gap-4 sm:gap-6 lg:max-w-none my-1 sm:my-2 py-2 sm:py-4 border-t border-muted">
+          <h2 className="flex flex-row items-center justify-start gap-2 text-xl font-semibold tracking-tight md:text-3xl opacity-80 mb-2 sm:mb-4">
             <Calendar size={28}/>
             Hobbies & Volunteer
           </h2>
