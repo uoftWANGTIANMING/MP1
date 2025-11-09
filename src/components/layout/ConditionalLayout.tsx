@@ -15,17 +15,14 @@ export function ConditionalLayout({
 
   useEffect(() => {
     if (isCNRoute) {
-      // 为中文博客路由设置 body 和 html 样式
       document.body.className = 'min-h-screen font-serif'
       document.body.style.backgroundColor = '#f0ead6'
       document.body.style.color = '#27272a'
       document.body.style.display = 'block'
       document.documentElement.className = 'h-full antialiased'
       document.documentElement.style.backgroundColor = '#f0ead6'
-      // 移除 dark 类
       document.documentElement.classList.remove('dark')
     } else {
-      // 恢复主站 body 样式
       document.body.className = 'flex min-h-full'
       document.body.style.backgroundColor = ''
       document.body.style.color = ''

@@ -9,10 +9,8 @@ import Link from 'next/link'
 import { Favicon } from "favicon-stealer";
 
 export function ProjectCard({ project, titleAs }: { project: ProjectItemType, titleAs?: keyof JSX.IntrinsicElements }) {
-  // Check if project has demo or repository links
   const hasMultipleLinks = project.demo || project.repository
   
-  // Handle internal links (starting with /) and external links
   const isInternalLink = project.link.href.startsWith('/')
   const linkHref = isInternalLink 
     ? project.link.href 
@@ -20,7 +18,6 @@ export function ProjectCard({ project, titleAs }: { project: ProjectItemType, ti
   
   let Component = titleAs ?? 'h2'
   
-  // Helper function to format external URLs
   const formatUrl = (url: string) => {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return `${url}?utm_source=${utm_source}`
@@ -28,7 +25,6 @@ export function ProjectCard({ project, titleAs }: { project: ProjectItemType, ti
     return `https://${url}?utm_source=${utm_source}`
   }
   
-  // If project has demo or repository links, show buttons instead of full card link
   if (hasMultipleLinks) {
     return (
       <li className='group relative flex flex-col items-start h-full'>
@@ -68,7 +64,6 @@ export function ProjectCard({ project, titleAs }: { project: ProjectItemType, ti
               </div>
             )}
             
-            {/* Action buttons */}
             <div className="flex flex-wrap gap-2">
               {project.demo && (
                 <Link
@@ -101,7 +96,6 @@ export function ProjectCard({ project, titleAs }: { project: ProjectItemType, ti
     )
   }
   
-  // If href is #, don't render a link
   if (project.link.href === '#') {
     return (
       <li className='group relative flex flex-col items-start h-full'>
@@ -142,7 +136,6 @@ export function ProjectCard({ project, titleAs }: { project: ProjectItemType, ti
     )
   }
   
-  // Default behavior: entire card is clickable
   return (
     <li className='group relative flex flex-col items-start h-full'>
       <div className="relative flex flex-col justify-between h-full w-full p-4 rounded-2xl border border-muted-foreground/20 shadow-sm transition-all group-hover:scale-[1.03] group-hover:shadow-md group-hover:bg-muted/5">

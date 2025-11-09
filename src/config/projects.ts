@@ -1,4 +1,3 @@
-// Types
 export type ProjectItemType = {
   name: string
   description: string
@@ -21,7 +20,6 @@ export type PurchaseItemType = {
   price: string
 }
 
-// Research & Projects
 export const projectHeadLine = "Research & Projects"
 export const projectIntro = "Academic research and technical projects I've worked on."
 
@@ -48,12 +46,10 @@ export const projects: Array<ProjectItemType> = [
   }
 ]
 
-// Hobbies & Volunteer
 export const activitiesHeadLine = "Hobbies & Volunteer"
 export const activitiesIntro = "Personal interests and community contributions."
 
 export const activities: Array<ActivityItemType> = [
-  // Placeholder for future volunteer activities
   {
     name: 'To be updated',
     description: 'Upcoming community or volunteer contributions will be listed here.',
@@ -63,7 +59,6 @@ export const activities: Array<ActivityItemType> = [
   }
 ]
 
-// MVP0.1 Purchase Items
 export const mvp01Items: Array<PurchaseItemType> = [
   {
     name: 'Portable USB Music Player Black Stereo Mini Speaker',
