@@ -14,9 +14,9 @@ export function Footer() {
   links.push({ name: 'Email', ariaLabel: 'Email', icon: 'email', href: `mailto:${email}`, label: 'Email' })
 
   return (
-    <footer className="mt-2 sm:mt-4 lg:mt-8 flex-none">
+    <footer className="mt-0 sm:mt-1 lg:mt-2 flex-none">
       <ContainerOuter>
-        <div className="border-t border-muted pb-4 sm:pb-6 lg:pb-12 pt-3 sm:pt-4 lg:pt-8">
+        <div className="border-t border-muted pb-4 sm:pb-6 lg:pb-12 pt-2 sm:pt-3 lg:pt-4">
           <ContainerInner>
             <div className="flex flex-col items-center justify-center gap-3">
               <div className="text-sm text-muted-foreground">

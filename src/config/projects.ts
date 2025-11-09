@@ -4,6 +4,8 @@ export type ProjectItemType = {
   description: string
   link: { href: string; label: string }
   tags: string[]
+  demo?: { href: string; label: string }
+  repository?: { href: string; label: string }
 }
 
 export type ActivityItemType = {
@@ -24,6 +26,14 @@ export const projectHeadLine = "Research & Projects"
 export const projectIntro = "Academic research and technical projects I've worked on."
 
 export const projects: Array<ProjectItemType> = [
+  {
+    name: 'On-chain Performance Profiler',
+    description: 'Lightweight multi-chain performance metrics measurement and visualization system.',
+    link: { href: '#', label: 'View Project' },
+    tags: ['Blockchain', 'Performance'],
+    demo: { href: 'https://profiler.tianming.online/', label: 'View Demo' },
+    repository: { href: 'https://github.com/uoftWANGTIANMING/onchain-performance-profiler', label: 'Repository' }
+  },
   {
     name: 'AI Companion for Cat',
     description: 'Why are all AI companions designed for humans? What about cats?',

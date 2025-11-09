@@ -329,7 +329,7 @@ export function Header() {
               className="order-last mt-[calc(theme(spacing.8)-theme(spacing.3))]"
             />
             <Container
-              className="top-0 order-last -mb-2 pt-4"
+              className="top-0 order-last -mb-2 pt-6"
               style={{
                 position:
                   'var(--header-position)' as React.CSSProperties['position'],
@@ -345,7 +345,7 @@ export function Header() {
                 <div className="relative">
                   <div className="flex flex-row items-center justify-center w-full">
                     <div
-                      className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight flex flex-row justify-center py-3 sm:py-4 md:py-5 px-4"
+                      className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight flex flex-row justify-center py-1 sm:py-2 md:py-2 px-4"
                       style={{
                         opacity: 'var(--avatar-hi-opacity, 0)',
                         transform: 'var(--avatar-hi-transform)'
@@ -388,8 +388,6 @@ export function Header() {
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
             </div>
           </Container>
