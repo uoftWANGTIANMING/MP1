@@ -32,28 +32,28 @@ export function ConditionalLayout({
   }, [isCNRoute])
 
   if (isCNRoute) {
-    return (
-      <>
-        <Script
-          id="cn-route-styles"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                if (window.location.pathname.startsWith('/cn')) {
-                  document.documentElement.style.backgroundColor = '#f0ead6';
-                  document.body.style.backgroundColor = '#f0ead6';
-                  document.body.style.display = 'block';
-                  document.body.className = 'min-h-screen font-serif';
-                  document.documentElement.classList.remove('dark');
-                }
-              })();
-            `,
-          }}
-        />
-        {children}
-      </>
-    )
+   return (
+     <>
+       <Script
+         id="cn-route-styles"
+         strategy="afterInteractive"
+         dangerouslySetInnerHTML={{
+           __html: `
+             (function() {
+               if (window.location.pathname.startsWith('/cn')) {
+                 document.documentElement.style.backgroundColor = '#f0ead6';
+                 document.body.style.backgroundColor = '#f0ead6';
+                 document.body.style.display = 'block';
+                 document.body.className = 'min-h-screen font-serif';
+                 document.documentElement.classList.remove('dark');
+               }
+             })();
+           `,
+         }}
+       />
+       {children}
+     </>
+   )
   }
 
   return (
